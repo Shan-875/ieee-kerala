@@ -1,7 +1,5 @@
 # IEEE SSCS Kerala Chapter Website
 
-<div align="center">
-
 ![IEEE SSCS Kerala Chapter](https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20professional%20website%20hero%20banner%20for%20IEEE%20SSCS%20Kerala%20Chapter%20semiconductor%20chip%20blue%20gold%20tech%20clean%20minimal%20logo%20style&image_size=landscape_16_9)
 
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev/)
@@ -14,10 +12,9 @@
 **Official website of the IEEE Solid-State Circuits Society — Kerala Chapter**
 A world-class, professional platform showcasing Kerala's premier semiconductor community.
 
+**Quick Links:**
 [Overview](#-overview) • [Key Sections](#-key-sections) • [Quick Start](#-quick-start) • [Customization](#-customization)
-[Tech Stack](#-tech-stack) • [Project Structure](#-project-structure) • [Deployment](#-deployment)
-
-</div>
+[Tech Stack](#-tech-stack) • [Project Structure](#-project-structure) • [Deployment](#-deployment) • [Contributing](#-contributing)
 
 ---
 
@@ -104,7 +101,7 @@ npm run preview
 
 All site content is centralized in a single data file for easy updates.
 
-### 📝 Content editing → `src/data/siteData.ts`
+### 📝 Content editing — src/data/siteData.ts
 
 Update everything without touching component code:
 
@@ -116,7 +113,7 @@ Update everything without touching component code:
 | `benefits` | Hero benefit grid links (JSSC, Conferences, Webinars…) |
 | `about` | Vision, Mission, Tagline, Who we are, Society facts, Pillars |
 | `stats` | Stats counters shown in Hero & dashboards |
-| `membershipBenefits` | 6 benefit cards → title/description/icon |
+| `membershipBenefits` | 6 benefit cards — title/description/icon |
 | `events` | All event listings including featured, speakers, attendance, mode |
 | `studentExecom2025` / `professionalExecom2025` | Names, roles, bios, LinkedIn/email |
 | `sbChapters` | College names, region hubs, established years |
@@ -134,7 +131,7 @@ Update everything without touching component code:
 | `newsItems` | Latest news with categories (new) |
 | `globalReach` | Worldwide SSCS stats display (new) |
 
-### 🎨 Styling → `src/index.css`
+### 🎨 Styling — src/index.css
 
 Design tokens live in Tailwind v4's `@theme` block:
 
@@ -178,7 +175,7 @@ sscs-kerala/
 ├── src/
 │   ├── components/            # All 24 UI components
 │   │   ├── About.tsx
-│   │   ├── Achievements.tsx          # NEW · Awards cards
+│   │   ├── Achievements.tsx          # NEW — Awards cards
 │   │   ├── AnnouncementTicker.tsx
 │   │   ├── DistinguishedLecturers.tsx
 │   │   ├── Events.tsx
@@ -187,12 +184,12 @@ sscs-kerala/
 │   │   ├── FloatingActions.tsx       # Sticky back-to-top + contact
 │   │   ├── Footer.tsx
 │   │   ├── Gallery.tsx
-│   │   ├── GlobalReach.tsx           # NEW · Worldwide SSCS stats
+│   │   ├── GlobalReach.tsx           # NEW — Worldwide SSCS stats
 │   │   ├── Hero.tsx
 │   │   ├── MembershipBenefits.tsx
-│   │   ├── Milestones.tsx            # NEW · Alternating timeline
+│   │   ├── Milestones.tsx            # NEW — Alternating timeline
 │   │   ├── Navbar.tsx
-│   │   ├── NewsSection.tsx           # NEW · Categorized news
+│   │   ├── NewsSection.tsx           # NEW — Categorized news
 │   │   ├── ResearchHighlights.tsx
 │   │   ├── SBChapters.tsx
 │   │   ├── Sponsors.tsx
@@ -200,7 +197,7 @@ sscs-kerala/
 │   │   ├── TeamSection.tsx
 │   │   └── Testimonials.tsx
 │   ├── data/
-│   │   └── siteData.ts               # ⭐ Central content hub
+│   │   └── siteData.ts               # CENTRAL CONTENT HUB
 │   ├── assets/
 │   │   ├── hero.png
 │   │   ├── react.svg
@@ -225,7 +222,7 @@ sscs-kerala/
 ### Vercel / Netlify
 
 1. Push to GitHub / GitLab
-2. Import the project → **Framework preset = Vite**
+2. Import the project — **Framework preset = Vite**
 3. Build command: `npm run build`
 4. Output directory: `dist`
 5. Deploy 🎉
@@ -239,7 +236,7 @@ npm run build
 
 ### Static Hosting (S3, Cloudflare Pages, Nginx…)
 
-Copy the `dist/` folder → 117KB CSS + 448KB JS (131KB gzipped).
+Copy the `dist/` folder — 117KB CSS + 448KB JS (131KB gzipped).
 
 ---
 
@@ -279,10 +276,6 @@ IEEE®, SSCS®, and the IEEE logo are trademarks of the Institute of Electrical 
 
 ---
 
-<div align="center">
+**Made with 💙 by IEEE SSCS Kerala Volunteers**
 
-Made with 💙 by **IEEE SSCS Kerala Volunteers**
-
-[⬆ Back to top](#ieee-sscs-kerala-chapter-website)
-
-</div>
+⬆ [Back to top](#ieee-sscs-kerala-chapter-website)
