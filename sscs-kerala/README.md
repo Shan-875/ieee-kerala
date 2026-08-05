@@ -219,7 +219,91 @@ sscs-kerala/
 
 ## ☁️ Deployment
 
-### Vercel / Netlify
+### GitHub Pages (recommended)
+
+This project now ships with a Pages-safe build configuration so assets resolve correctly when the site is served from a repository subpath such as:
+
+`https://<your-username>.github.io/sscs-kerala/`
+
+#### Required setup
+
+1. In `vite.config.ts`, the build uses a relative base path:
+
+```ts
+base: './'
+```
+
+2. The site favicon is also referenced with a relative path in `index.html`.
+
+3. Build the production site:
+
+```bash
+npm run build
+```
+
+4. Deploy using either:
+
+- GitHub Actions workflow (recommended), or
+- the `dist/` folder on a Pages branch
+
+#### GitHub Actions deployment
+
+Create a workflow file in `.github/workflows/deploy.yml` with the following job:
+
+```yaml
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build site
+        run: npm run build
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+```
+
+#### Static hosting (Vercel / Netlify / Cloudflare Pages)
 
 1. Push to GitHub / GitLab
 2. Import the project — **Framework preset = Vite**
@@ -227,16 +311,11 @@ sscs-kerala/
 4. Output directory: `dist`
 5. Deploy 🎉
 
-### GitHub Pages
+### Notes
 
-```bash
-npm run build
-# Push contents of dist/ to gh-pages branch
-```
-
-### Static Hosting (S3, Cloudflare Pages, Nginx…)
-
-Copy the `dist/` folder — 117KB CSS + 448KB JS (131KB gzipped).
+- The final build output is generated in `dist/`
+- If you deploy to GitHub Pages from a repository subpath, the relative `base` setting prevents broken asset loading and 404 errors
+- For a repo Pages site, keep the favicon and static assets inside `public/`
 
 ---
 
