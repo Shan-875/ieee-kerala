@@ -25,28 +25,9 @@ export default function Navbar() {
       <nav className="container-pro flex h-16 items-center justify-between">
         <a href="#top" className="flex items-center gap-3">
           <img
-            src={typeof window !== 'undefined' ? '/logo.png.png' : logo}
+            src={logo}
             alt="IEEE logo"
             className="h-11 w-auto"
-            onError={(e) => {
-              // If PNG not present, try SVG in public folder, then fallback to bundled asset
-              // @ts-ignore
-              const img = e.currentTarget;
-              if (img.src.endsWith('.png')) {
-                img.onerror = null;
-                img.src = '/ieee-logo.svg';
-                img.onerror = () => {
-                  // @ts-ignore
-                  img.src = logo;
-                };
-              } else {
-                // final fallback
-                // @ts-ignore
-                img.onerror = null;
-                // @ts-ignore
-                img.src = logo;
-              }
-            }}
           />
         </a>
 
