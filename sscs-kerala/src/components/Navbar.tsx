@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { navLinks, contact } from "../data/siteData";
-import logo from "../assets/logo.svg";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -25,7 +24,7 @@ export default function Navbar() {
       <nav className="container-pro flex h-16 items-center justify-between">
         <a href="#top" className="flex items-center gap-3">
           <img
-            src={logo}
+            src="/logo.png"
             alt="IEEE logo"
             className="h-11 w-auto"
           />
