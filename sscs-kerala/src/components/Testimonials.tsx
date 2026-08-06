@@ -1,66 +1,72 @@
-import { motion } from "framer-motion";
-import { Quote, Users, UserCheck } from "lucide-react";
-import { testimonials } from "../data/siteData";
+import { Quote } from "lucide-react";
 
-const initialsOf = (name: string) =>
-  name
-    .split(" ")
-    .filter(Boolean)
-    .map((w) => w[0]?.toUpperCase() ?? "")
-    .join("")
-    .slice(0, 2);
+const testimonials = [
+  {
+    quote:
+      "The SSCS Kerala workshops and mentorship directly landed me my first VLSI design internship at a top semiconductor firm. The chapter genuinely cares about student outcomes.",
+    name: "Anika Varma",
+    title: "MTech VLSI Design, CUSAT · SSCS Student Member",
+  },
+  {
+    quote:
+      "As a faculty coordinator, I've seen this chapter organize professional-grade events — from proposal to execution everything is top notch, comparable to national-level technical societies.",
+    name: "Dr. Manoj Kurup",
+    title: "Professor & Dean (R&amp;D), NIT Calicut",
+  },
+  {
+    quote:
+      "SSCS Kerala's Distinguished Lecturer events are always well organized. I send my entire team to attend because the quality of talks and networking is genuinely worth the trip.",
+    name: "Arjun Menon",
+    title: "Senior Design Manager · Analog Devices India",
+  },
+  {
+    quote:
+      "From the research travel grant to the paper reviews and industry connections — the chapter supported me through every step of my PhD research on low-power ADCs.",
+    name: "Sruthi Sreenivasan",
+    title: "PhD Research Scholar · IIT Madras / SSCS Kerala",
+  },
+];
 
 export default function Testimonials() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-50 py-24">
-      <div className="absolute inset-0 opacity-[0.06] [background-image:radial-gradient(circle_at_1px_1px,rgba(15,23,42,0.6)_1px,transparent_0)] [background-size:24px_24px]" />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-rose-500/20 bg-rose-50 px-4 py-1 text-xs font-extrabold tracking-[0.2em] uppercase text-rose-700">
-            <Users className="h-3.5 w-3.5" />
-            Members speak
-          </span>
-          <h2 className="mt-4 font-display text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
-            What our <span className="text-ieee-blue">members say</span>
-          </h2>
-          <p className="mt-5 text-lg leading-relaxed text-slate-600">
-            Real outcomes from students, chapter leads and young professionals in SSCS Kerala's
-            community.
+    <section id="testimonials" className="section-padding bg-blue-50">
+      <div className="container-pro">
+        <div className="section-center max-w-3xl mx-auto">
+          <span className="eyebrow-text">Testimonials</span>
+          <h2 className="section-heading">What our community says</h2>
+          <p className="section-subheading">
+            Feedback from students, faculty and industry partners who work closely with the SSCS
+            Kerala Chapter every year.
           </p>
         </div>
 
-        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((t, i) => (
-            <motion.figure
-              key={t.author}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: i * 0.05 }}
-              className="group relative flex flex-col rounded-3xl border border-slate-200 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-ieee-blue/30 hover:shadow-[0_30px_60px_-20px_rgba(0,98,155,0.25)]"
-            >
-              <Quote className="h-8 w-8 shrink-0 text-ieee-blue/20 transition group-hover:text-ieee-blue/40" />
-              <blockquote className="mt-4 flex-1 text-slate-700 leading-relaxed">
-                "{t.quote}"
-              </blockquote>
-              <figcaption className="mt-6 flex items-center gap-4 border-t border-slate-100 pt-5">
-                <div
-                  className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${t.avatarTint} text-white shadow-md`}
-                >
-                  <span className="font-display text-sm font-black tracking-tight">
-                    {initialsOf(t.author)}
-                  </span>
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-1.5 text-[15px] font-bold text-slate-900">
-                    <UserCheck className="h-3.5 w-3.5 text-ieee-blue" />
-                    {t.author}
+        <div className="grid gap-5 md:grid-cols-2">
+          {testimonials.map((t) => {
+            const initials = t.name
+              .split(" ")
+              .filter((_, i, a) => i === 0 || i === a.length - 1)
+              .map((n) => n[0])
+              .join("");
+            return (
+              <figure key={t.name} className="group card-base p-7 sm:p-8 flex flex-col h-full bg-blue-100 border-blue-200">
+                <Quote className="h-8 w-8 text-blue-600/80 shrink-0" strokeWidth={1.5} />
+                <blockquote className="mt-5 text-[15.5px] leading-7 text-slate-900">
+                  "{t.quote}"
+                </blockquote>
+                <figcaption className="mt-7 pt-6 border-t border-blue-200 flex items-center gap-4 mt-auto">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-blue-900 to-sky-700 text-white font-bold tracking-tight ring-4 ring-blue-100 transition-transform group-hover:scale-[1.08]">
+                    {initials}
                   </div>
-                  <div className="truncate text-xs text-slate-500">{t.role}</div>
-                </div>
-              </figcaption>
-            </motion.figure>
-          ))}
+                  <div className="min-w-0">
+                    <div className="font-bold text-slate-900 leading-tight">{t.name}</div>
+                    <div className="mt-0.5 text-[13px] text-blue-900 leading-snug">
+                      {t.title}
+                    </div>
+                  </div>
+                </figcaption>
+              </figure>
+            );
+          })}
         </div>
       </div>
     </section>

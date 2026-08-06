@@ -48,13 +48,13 @@ export const heroSlides = [
 ];
 
 export const announcements = [
-  "� SSCS Kerala wins 'Best Small Chapter Award' — IEEE India Council 2025",
-  "🚀 FPGA Design Workshop registrations open across all Student Branches in Kerala",
-  "📣 Call for Nominations: SSCS Distinguished Lecturer visits 2025-26 now open",
-  "� IEEE SSCS Predoctoral Achievement Award — final call, applications closing soon",
-  "💡 JSSC Special Issue on Edge-AI Accelerators — paper submissions invited",
-  "🤝 India Semiconductor Mission (ISM) partnered skilling program — registrations live",
-  "✨ Women in Circuits (WiC) national hackathon — ₹2L+ prize pool announced",
+  "SSCS Kerala wins Best Small Chapter Award — IEEE India Council 2025",
+  "FPGA Design Workshop registrations open across all Student Branches in Kerala",
+  "Call for Nominations: SSCS Distinguished Lecturer visits 2025-26 now open",
+  "IEEE SSCS Predoctoral Achievement Award — final call, applications closing soon",
+  "JSSC Special Issue on Edge-AI Accelerators — paper submissions invited",
+  "India Semiconductor Mission (ISM) partnered skilling program — registrations live",
+  "Women in Circuits (WiC) national hackathon — prize pool announced",
 ];
 
 export const benefits = [

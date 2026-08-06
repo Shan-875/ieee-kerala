@@ -1,73 +1,135 @@
-import { motion } from "framer-motion";
-import { ZoomIn } from "lucide-react";
-import { galleryImages } from "../data/siteData";
+import { ArrowUpRight } from "lucide-react";
 
-const imgUrl = (prompt: string, size: string) => {
-  const encoded = encodeURIComponent(prompt);
-  return `https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=${encoded}&image_size=${size}`;
-};
+const gallery = [
+  {
+    title: "SSCS Annual Workshop 2025",
+    location: "IIT Palakkad",
+    date: "Dec 2025",
+    participants: 220,
+    tone: "blue",
+  },
+  {
+    title: "Distinguished Lecture by Prof. Razavi",
+    location: "NIT Calicut",
+    date: "Mar 2025",
+    participants: 340,
+    tone: "slate",
+  },
+  {
+    title: "Open-Source Silicon Hackathon",
+    location: "IIIT Kottayam",
+    date: "Sep 2025",
+    participants: 96,
+    tone: "cyan",
+  },
+  {
+    title: "VLSI Physical Design Workshop",
+    location: "CUSAT, Kochi",
+    date: "Jun 2025",
+    participants: 110,
+    tone: "violet",
+  },
+  {
+    title: "IEEE Kerala Section Student Congress",
+    location: "Trivandrum",
+    date: "Oct 2025",
+    participants: 600,
+    tone: "blue",
+  },
+  {
+    title: "PCB &amp; Embedded Systems Lab",
+    location: "Amal Jyothi College",
+    date: "Feb 2025",
+    participants: 72,
+    tone: "slate",
+  },
+  {
+    title: "Industry Internship Fair",
+    location: "Virtual + Kochi",
+    date: "Nov 2025",
+    participants: 450,
+    tone: "cyan",
+  },
+  {
+    title: "RFIC Design Summer School",
+    location: "IISc Kochi Campus",
+    date: "Jul 2025",
+    participants: 55,
+    tone: "violet",
+  },
+];
 
-const aspectMap: Record<string, string> = {
-  landscape_16_9: "aspect-[16/9]",
-  landscape_4_3: "aspect-[4/3]",
-  portrait_16_9: "aspect-[9/16]",
-  portrait_4_3: "aspect-[3/4]",
-  square: "aspect-square",
-  square_hd: "aspect-square",
+const toneMap: Record<string, string> = {
+  blue: "bg-gradient-to-br from-blue-600 via-blue-700 to-slate-900",
+  slate: "bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950",
+  cyan: "bg-gradient-to-br from-slate-900 via-sky-800 to-blue-700",
+  violet: "bg-gradient-to-br from-indigo-900 via-slate-900 to-slate-950",
 };
 
 export default function Gallery() {
   return (
-    <section id="gallery" className="relative bg-white py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-ieee-blue/20 bg-ieee-blue/5 px-4 py-1 text-xs font-bold tracking-wider uppercase text-ieee-blue">
-            <ZoomIn className="h-3.5 w-3.5" />
-            Gallery
-          </span>
-          <h2 className="mt-4 font-display text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
-            Moments & <span className="text-ieee-blue">Highlights</span>
-          </h2>
-          <p className="mt-5 text-lg leading-relaxed text-slate-600">
-            A glimpse into our workshops, conferences, student activities, and chapter events across Kerala.
-          </p>
+    <section id="gallery" className="section-padding bg-blue-50">
+      <div className="container-pro">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
+          <div className="max-w-2xl">
+            <span className="eyebrow-text">Gallery &amp; highlights</span>
+            <h2 className="section-heading !mt-3">Moments from our events &amp; programs</h2>
+          </div>
+          <a href="#" className="btn-outline self-start shrink-0">
+            View full gallery
+            <ArrowUpRight className="h-4 w-4" />
+          </a>
         </div>
 
-        <div className="mt-16 columns-1 gap-5 sm:columns-2 lg:columns-3 [column-fill:_balance]">
-          {galleryImages.map((image, index) => (
-            <motion.figure
-              key={image.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.06 }}
-              className="group mb-5 break-inside-avoid"
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {gallery.map((g, idx) => (
+            <article
+              key={g.title}
+              className={`group relative card-base overflow-hidden !p-0 aspect-[4/3] ${
+                idx === 0 ? "md:col-span-2 md:row-span-2 md:aspect-auto" : ""
+              }`}
             >
-              <div
-                className={`relative overflow-hidden rounded-3xl bg-slate-100 shadow-sm ring-1 ring-slate-900/5 ${
-                  aspectMap[image.size] ?? "aspect-[4/3]"
-                }`}
-              >
-                <img
-                  src={imgUrl(image.prompt, image.size)}
-                  alt={image.alt}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-105"
-                  onError={(e) => {
-                    const t = e.currentTarget;
-                    t.style.display = "none";
+              <div className={`absolute inset-0 ${toneMap[g.tone]} transition-transform duration-500 group-hover:scale-[1.03]`}>
+                <div
+                  className="absolute inset-0 opacity-20 mix-blend-overlay"
+                  style={{
+                    backgroundImage:
+                      "radial-gradient(circle at 20% 30%, rgba(255,255,255,0.5), transparent 45%), radial-gradient(circle at 80% 80%, rgba(255,255,255,0.25), transparent 40%)",
                   }}
+                  aria-hidden
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/0 via-40% to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                <div className="absolute inset-x-0 bottom-0 translate-y-4 p-5 text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                  <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-cyan-300">
-                    <ZoomIn className="h-3.5 w-3.5" />
-                    SSCS Kerala
-                  </div>
-                  <p className="mt-1.5 text-sm font-semibold leading-snug">{image.alt}</p>
-                </div>
+                <div
+                  className="absolute inset-0 opacity-[0.12]"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)",
+                    backgroundSize: "24px 24px",
+                  }}
+                  aria-hidden
+                />
               </div>
-            </motion.figure>
+
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+
+              <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
+                <div className="flex items-center justify-between text-[11px] font-semibold uppercase tracking-wider text-white/75">
+                  <span>{g.date}</span>
+                  <span>{g.participants} attendees</span>
+                </div>
+                <h3 className="mt-2 font-bold leading-snug text-white">{g.title}</h3>
+                <div className="mt-1.5 text-[13px] text-white/70">{g.location}</div>
+              </div>
+
+              <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                <a
+                  href="#"
+                  className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-white text-slate-900 shadow-md"
+                  aria-label="Open gallery item"
+                >
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
+              </div>
+            </article>
           ))}
         </div>
       </div>

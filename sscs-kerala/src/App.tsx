@@ -31,7 +31,7 @@ import {
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-white text-slate-800 antialiased">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(37,99,235,0.14),_transparent_28%),linear-gradient(135deg,_#eff6ff_0%,_#dbeafe_45%,_#bfdbfe_100%)] text-slate-900 antialiased">
       <Navbar />
       <AnnouncementTicker />
       <main>

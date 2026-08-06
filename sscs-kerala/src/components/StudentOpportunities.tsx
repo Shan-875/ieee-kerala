@@ -1,77 +1,95 @@
-import { motion } from "framer-motion";
 import {
-  Trophy,
-  Building2,
   GraduationCap,
-  PlaneTakeoff,
-  ArrowUpRight,
+  Rocket,
   Sparkles,
+  Briefcase,
+  ArrowUpRight,
+  Users,
 } from "lucide-react";
-import { studentOpportunities } from "../data/siteData";
 
-const iconMap: Record<string, typeof Trophy> = {
-  PlaneTakeoff,
-  Trophy,
-  Building2,
-  GraduationCap,
-};
+const opportunities = [
+  {
+    icon: Sparkles,
+    title: "SSCS Student Membership",
+    desc: "Join as a student member for exclusive access to conferences, workshops, mentorship programs and travel grants.",
+    tag: "Open year-round",
+    cta: "Join as Student",
+  },
+  {
+    icon: GraduationCap,
+    title: "Summer Research Fellowship",
+    desc: "Paid 8-week research fellowship under faculty mentors at IITs/NITs for students with top academic records.",
+    tag: "Applications: March",
+    cta: "Apply for Fellowship",
+  },
+  {
+    icon: Rocket,
+    title: "Open-Source Silicon Program",
+    desc: "End-to-end chip-design experience using SkyWater 130 nm PDK — from RTL to GDS-II with fabrication subsidy.",
+    tag: "Cohort: Jul – Dec",
+    cta: "Join Silicon Program",
+  },
+  {
+    icon: Briefcase,
+    title: "Industry Internship &amp; Career Fair",
+    desc: "Direct hiring pipeline with partner semiconductor companies — TI, ADI, Qualcomm, NVIDIA and more.",
+    tag: "Career Fair: Nov",
+    cta: "View Internships",
+  },
+];
 
 export default function StudentOpportunities() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-indigo-600 via-ieee-blue to-ieee-blue-dark py-24 text-white">
-      <div className="absolute inset-0 opacity-[0.07] [background-image:linear-gradient(rgba(255,255,255,0.9)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.9)_1px,transparent_1px)] [background-size:40px_40px]" />
-      <div className="absolute -left-20 top-10 h-72 w-72 rounded-full bg-cyan-400/20 blur-3xl" />
-      <div className="absolute -right-20 bottom-10 h-72 w-72 rounded-full bg-fuchsia-400/20 blur-3xl" />
+    <section id="students" className="section-padding bg-blue-950 text-white">
+      <div className="container-pro">
+        <div className="grid gap-10 lg:grid-cols-[1fr,1.3fr] items-start">
+          <div className="lg:sticky lg:top-24">
+            <span className="text-[12px] font-semibold uppercase tracking-[0.18em] text-blue-400">
+              For students
+            </span>
+            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight leading-[1.1] max-w-xl">
+              Programs built to launch your semiconductor career
+            </h2>
+            <p className="mt-5 max-w-lg text-[16px] text-slate-100 leading-8">
+              SSCS Kerala invests in every student member with structured programs, hands-on
+              research, industry connections and financial support to attend national and
+              international events.
+            </p>
+            <div className="mt-8 flex items-center gap-3 text-[14px] text-slate-300">
+              <Users className="h-5 w-5 text-blue-400" />
+              <span>96% of our 2024 student members secured internships or full-time roles.</span>
+            </div>
+          </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1 text-xs font-extrabold tracking-[0.2em] uppercase text-cyan-200 backdrop-blur">
-            <Sparkles className="h-3.5 w-3.5" />
-            Student & YP Hub
-          </span>
-          <h2 className="mt-4 font-display text-4xl font-extrabold tracking-tight sm:text-5xl">
-            Students & Young <span className="bg-gradient-to-r from-cyan-300 to-sky-200 bg-clip-text text-transparent">Professionals</span>
-          </h2>
-          <p className="mt-5 text-lg leading-relaxed text-white/80">
-            Travel grants, awards, chapter funding, and outreach kits — the SSCS global society
-            funds real student impact every year.
-          </p>
-        </div>
-
-        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {studentOpportunities.map((op, i) => {
-            const Icon = iconMap[op.icon] ?? Trophy;
-            return (
-              <motion.a
-                key={op.title}
-                href={op.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ delay: i * 0.08 }}
-                className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-white/10 hover:shadow-[0_30px_60px_-20px_rgba(103,232,249,0.35)]"
-              >
+          <div className="grid gap-4 sm:grid-cols-2">
+            {opportunities.map((o) => {
+              const Icon = o.icon;
+              return (
                 <div
-                  className={`pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full opacity-60 blur-2xl bg-gradient-to-br ${op.tint}`}
-                />
-                <div className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15 text-white ring-1 ring-white/20 transition group-hover:scale-105">
-                  <Icon className="h-6 w-6" />
+                  key={o.title}
+                  className="group relative rounded-2xl border border-blue-200/20 bg-blue-950/90 p-7 transition-all hover:border-blue-400/50 hover:bg-blue-950"
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-400/20 text-blue-400 transition-colors group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600">
+                      <Icon className="h-5.5 w-5.5" strokeWidth={2} />
+                    </div>
+                  </div>
+                  <div className="mt-2 inline-flex items-center rounded-full border border-sky-300/20 bg-sky-900/10 px-2.5 py-0.5 text-[11px] font-semibold text-sky-200">
+                    {o.tag}
+                  </div>
+                  <h3 className="mt-4 font-bold text-white text-lg leading-snug">{o.title}</h3>
+                  <p className="mt-2.5 text-[14px] leading-6 text-blue-200">{o.desc}</p>
+                  <a
+                    href="#"
+                    className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-semibold text-sky-200 group-hover:text-white"
+                  >
+                    {o.cta}
+                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </a>
                 </div>
-                <h3 className="relative mt-5 font-display text-lg font-bold leading-snug">
-                  {op.title}
-                </h3>
-                <p className="relative mt-3 text-sm leading-relaxed text-white/75">
-                  {op.blurb}
-                </p>
-                <div className="relative mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-cyan-200 transition group-hover:translate-x-0.5 group-hover:text-white">
-                  {op.cta}
-                  <ArrowUpRight className="h-4 w-4" />
-                </div>
-              </motion.a>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

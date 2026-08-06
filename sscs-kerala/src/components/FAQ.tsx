@@ -1,83 +1,71 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { HelpCircle, ChevronDown, CircleHelp } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { faqs } from "../data/siteData";
 
 export default function FAQ() {
   const [open, setOpen] = useState<string | null>(faqs[0]?.q ?? null);
 
   return (
-    <section className="bg-white py-24">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-ieee-blue/20 bg-ieee-blue/5 px-4 py-1 text-xs font-extrabold tracking-[0.2em] uppercase text-ieee-blue">
-            <HelpCircle className="h-3.5 w-3.5" />
-            FAQ
-          </span>
-          <h2 className="mt-4 font-display text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
-            Frequently asked <span className="text-ieee-blue">questions</span>
-          </h2>
-          <p className="mt-5 text-lg leading-relaxed text-slate-600">
+    <section className="section-pad bg-blue-50">
+      <div className="container-pro max-w-4xl">
+        <div className="section-header">
+          <span className="eyebrow">FAQ</span>
+          <h2 className="heading-2 mt-5">Frequently Asked Questions</h2>
+          <p className="section-lead text-blue-800">
             Everything from joining SSCS, to starting a Student Branch Chapter, to funding research
             travel.
           </p>
         </div>
 
-        <div className="mt-14 space-y-3">
-          {faqs.map((f) => {
+        <div className="mt-16 divide-y divide-blue-100 border-t border-b border-blue-100">
+          {faqs.map((f, i) => {
             const active = open === f.q;
             return (
-              <motion.div
+              <div
                 key={f.q}
-                layout
-                className={`overflow-hidden rounded-2xl border shadow-sm transition ${
-                  active
-                    ? "border-ieee-blue/40 bg-white shadow-[0_20px_50px_-20px_rgba(0,98,155,0.25)]"
-                    : "border-slate-200 bg-surface"
+                className={`group relative transition-colors ${
+                  active ? "bg-blue-100" : "bg-transparent hover:bg-blue-100/60"
                 }`}
               >
+                <div className={`absolute left-0 top-0 bottom-0 w-1 transition-all ${active ? "bg-[var(--color-black)]" : "bg-transparent"}`} />
                 <button
                   type="button"
                   onClick={() => setOpen(active ? null : f.q)}
-                  className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+                  className="flex w-full items-start justify-between gap-6 px-6 py-6 sm:px-8 sm:py-7 text-left"
                 >
-                  <span className="flex items-start gap-3">
-                    <CircleHelp
-                      className={`mt-0.5 h-5 w-5 shrink-0 transition ${
-                        active ? "text-ieee-blue" : "text-slate-400"
-                      }`}
-                    />
+                  <div className="flex items-start gap-5 min-w-0">
+                    <span className="numbered-label pt-1 shrink-0">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
                     <span
-                      className={`text-[15px] font-bold leading-snug ${
-                        active ? "text-ieee-blue" : "text-slate-800"
+                      className={`text-[15px] font-semibold leading-snug ${
+                        active ? "text-slate-900" : "text-blue-900"
                       }`}
                     >
                       {f.q}
                     </span>
-                  </span>
+                  </div>
                   <ChevronDown
-                    className={`h-5 w-5 shrink-0 transition-transform duration-300 ${
-                      active ? "rotate-180 text-ieee-blue" : "text-slate-400"
+                    className={`h-5 w-5 shrink-0 mt-0.5 transition-all duration-300 ${
+                      active ? "rotate-180 text-[var(--color-black)]" : "text-[var(--color-ink-300)] group-hover:text-[var(--color-ink-500)]"
                     }`}
+                    strokeWidth={1.5}
                   />
                 </button>
-                <AnimatePresence initial={false}>
-                  {active && (
-                    <motion.div
-                      key="content"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.28, ease: "easeOut" }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-6 pb-6 pl-14 text-slate-600 leading-relaxed">
+                <div
+                  className={`grid transition-all duration-300 ease-out ${
+                    active ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <div className="px-6 pb-7 sm:px-8 pl-[72px] sm:pl-[88px] pr-14">
+                      <p className="text-[14px] leading-[1.9] text-blue-800 max-w-2xl">
                         {f.a}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             );
           })}
         </div>
